@@ -1,0 +1,76 @@
+
+.title-name{font-size: 20px !important;}
+.black-text{color: black;}
+.red-text{color: red;}
+.blue-text{color: blue;}
+.green-text{color: greenyellow;}
+.white-text{color: white;}
+.actions-dots{font-size: 25px;}
+.text-input-fields-profile {width: 50%;}
+
+.user-account-img
+{
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+} 
+/* .id-Image
+{
+    margin-left: 10px;
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+} */
+.my-grid-container-2-columns
+{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.my-grid-container-3-columns
+{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.my-grid-container-4-columns
+{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+.my-grid-container-5-columns
+{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+
+.my-grid-item 
+{
+    padding: 10px;
+    font-size: 10px;
+}
+
+.profile-Image
+{
+    margin-left: 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.input-labels
+{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+/* .img-thumbnail
+{
+    width: 200px;
+    height: 90px;
+} */
+
+
+
+
+/* custom alert */
+
