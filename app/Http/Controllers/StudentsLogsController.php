@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GeneralHelper;
 use App\Models\StudentsLogsModel;
 use Illuminate\Http\Request;
 
@@ -9,10 +10,20 @@ class StudentsLogsController extends Controller
 {
     public function index(Request $request)
     {
+        $user = GeneralHelper::getUserName();
+        $role = GeneralHelper::getUserRole();
+
+        if($role == "Admin")
+        {
             $data = StudentsLogsModel::get();
             $total = StudentsLogsModel::count();
+        }
+        elseif($role == "Supervisor")
+        {
+            $data = StudentsLogsModel::where("Supervisor",$user)->get();
+            $total = StudentsLogsModel::where("Supervisor",$user)->count();
+        }
 
-            // return $data;
         return view('components/Logs/Index',[
             'data'=>$data,'total'=>$total,
         ]);

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\StudentsLogsController;
+use App\Models\CourseModel;
 use App\Models\StudentsModel;
 use App\Models\User;
 
@@ -31,18 +33,23 @@ Route::get('/dashboard', function () {
     // return view('/components/dashboard');
     $data = StudentsModel::latest()->get();
     $total = StudentsModel ::count();
+    $courses = CourseModel::get();
+
     $supervisors = User::where('role','Supervisor')->get(['id','name']);
 
         // return $supervisors;
     return view('components/Students/Index',[
         'data'=>$data,'total'=>$total,
-        'supervisors'=>$supervisors
+        'supervisors'=>$supervisors,
+        'courses'=>$courses,
+
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 // Get Ajax Data
 Route::get('/students/data/{id}', [StudentsController::class, 'getAjaxData']);
+Route::get('/course/data/{id}', [CourseController::class, 'getAjaxData']);
 Route::get('/students/logs/data/{id}', [StudentsLogsController::class, 'getAjaxData']);
 
 
@@ -52,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('students', StudentsController::class);
+    Route::resource('course' ,CourseController::class);
     Route::resource('students-logs', StudentsLogsController::class);
 
 });

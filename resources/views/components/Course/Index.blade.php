@@ -48,7 +48,6 @@
                     </div>
                 <center>
             @endif
-            
         <!-- Table with stripped rows -->
         <table class="table table-hover"  id="table">
         {{ csrf_field() }}
@@ -57,16 +56,8 @@
                 <tr>
                     <th  class="text-center">Created</th>
                     <th  class="text-center">Name</th>
-                    <th  class="text-center">Reg Number</th>
-                    <th  class="text-center">Email</th>
-                    <th  class="text-center">Course</th>
-                    <th  class="text-center">Supervisor</th>
-                    {{-- <th  class="text-center">Show</th> --}}
-                    
-                    @if (Auth::User()->role == 'Admin')
-                        <th  class="text-center">Modify</th>
-                        <th  class="text-center">Delete</th>
-                    @endif
+                    <th  class="text-center">Modify</th>
+                    <th  class="text-center">Delete</th>
                 </tr>
             </thead>
 
@@ -75,27 +66,15 @@
             @foreach($data as $student)
             <tr class="row{{$student->id}}">
                 <td class="text-center">{{$student -> created_at->toFormattedDateString()}}</td>
-                <td class="text-center">{{$student -> fullName}}</td>
-                <td class="text-center">{{$student -> regNum}}</td>
-                <td class="text-center">{{$student -> email}}</td>
-                <td class="text-center">{{$student -> course}}</td>
-                <td class="text-center">{{$student -> supervisor}}</td>
-                {{-- <td class="text-center">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-id="{{ $student->id }}" data-bs-target="#showModal"
-                    >Show</button>
-                </td> --}}
-                @if (Auth::User()->role== 'Admin')
+                <td class="text-center">{{$student -> name}}</td>
                 <td class="text-center">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-id="{{ $student->id }}" data-bs-target="#editModal"
                         >Edit</button>
                 </td>
-                
                 <td class="text-center">
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-id="{{ $student->id }}" data-bs-target="#deleteModal"
                     >Delete</button>
                 </td>
-                @endif
-                
         
 
             </tr>
@@ -131,45 +110,16 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form method="post" action="{{route('students.store')}}" >
+                <form method="post" action="{{route('course.store')}}" >
                     {{ csrf_field() }}
                 <div class="my-grid-container-3-columns">
-                    <input type="hidden" value="store"  class="form-control" name="store">
-    
-                    <div class="my-grid-item">
-                        <label class="input-labels" >Full Name</label>
-                        <input type="text"  class="form-control" name="fullName" placeholder="Student Full Name" autocomplete="off">
-                    </div>
                 
                     <div class="my-grid-item">
-                        <label class="input-labels" >Course</label>
-                        <select name="course" id="supervisor" class="form-control" >
-                            <option>-- Select --</option>
-                            @foreach ( $courses as $course)
-                                <option   type="text" value="{{$course->name}}" >{{$course->name}}</option>
-                            @endforeach
-                        </select>
+                        <label class="input-labels" >Course Name</label>
+                        <input name="name" type="text" required class="form-control" placeholder="Course Name"  autocomplete="off">
                     </div>
                 
-                    <div class="my-grid-item">
-                        <label class="input-labels" >Reg No</label>
-                        <input name="regNum" type="text" required class="form-control" placeholder="Reg Number" autocomplete="off">
-                    </div>
-                    
-                    <div class="my-grid-item">
-                        <label class="input-labels" >Email</label>
-                        <input type="text" name="email" required class="form-control" placeholder="Email"   autocomplete="off">
-                    </div>
-                    
-                    <div class="my-grid-item">
-                        <label class="input-labels" >Supervisor</label>
-                        <select name="supervisor" class="form-control" >
-                            <option>-- Select --</option>
-                            @foreach ( $supervisors as $supervisor)
-                                <option   type="text" value="{{$supervisor->name}}" >{{$supervisor->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                
                 </div>
                 <br><br>
                 <center>
@@ -201,46 +151,17 @@
         
         <!-- Modal body -->
         <div class="delete-modal-body">
-                <form method="post" action="{{route('students.update','null')}}" >
+                <form method="post" action="{{route('course.update','null')}}" >
                     {{method_field('patch')}}
                     {{ csrf_field() }}
                     <input type="hidden" id="editId" name="editId" value="editId" >
                     <div class="my-grid-container-3-columns">
 
                         <div class="my-grid-item">
-                            <label class="input-labels" >Full Name</label>
-                            <input type="text" id="fullName"  class="form-control" name="fullName" placeholder="Student Full Name" autocomplete="off">
-                        </div>
-                    
-                        <div class="my-grid-item">
                             <label class="input-labels" >Course</label>
-                            <select name="course" id="supervisor" class="form-control" >
-                                <option>-- Select --</option>
-                                @foreach ( $courses as $course)
-                                    <option   type="text" value="{{$course->name}}" >{{$course->name}}</option>
-                                @endforeach
-                            </select>
+                            <input name="name" id="edit-name" type="text" required class="form-control" placeholder="Course Name"  autocomplete="off">
                         </div>
                     
-                        <div class="my-grid-item">
-                            <label class="input-labels" >Reg No</label>
-                            <input name="regNum" id="regNum" type="text" placeholder="Reg Number" required class="form-control" autocomplete="off">
-                        </div>
-                        
-                        <div class="my-grid-item">
-                            <label class="input-labels" >Email</label>
-                            <input type="text" name="email" required class="form-control" placeholder="Email"  autocomplete="off">
-                        </div>
-                        
-                        <div class="my-grid-item">
-                            <label class="input-labels" >Supervisor</label>
-                            <select name="supervisor" id="supervisor" class="form-control" >
-                                <option>-- Select --</option>
-                                @foreach ( $supervisors as $supervisor)
-                                    <option   type="text" value="{{$supervisor->name}}" >{{$supervisor->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
                     </div>
                 <br><br>
                 <center>
@@ -280,7 +201,7 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No Close</button>
-                <form  action="{{route('students.destroy','null')}}" method="post">
+                <form  action="{{route('course.destroy','null')}}" method="post">
                     {{ csrf_field() }}
                     {{method_field('DELETE')}}
                     <button  type="submit" class="btn btn-primary" data-bs-dismiss="modal">Yes Delete</button>
@@ -305,14 +226,10 @@ $('#editModal').on('show.bs.modal', function (event) {
         var id = target.attr('data-bs-id');
         var modal = $(this)
         $.ajax({
-            url: '/students/data/' + id,
+            url: '/course/data/' + id,
             method: 'GET',
             success: function(response) {
-                $('#fullName').val(response.fullName);
-                $('#email').val(response.email);
-                $('#course').val(response.course);
-                $('#regNum').val(response.regNum);
-                $('#supervisor').val(response.supervisor);
+                $('#edit-name').val(response.name);
                 $('#editId').val(response.id);
             }
         });
@@ -325,11 +242,11 @@ $('#editModal').on('show.bs.modal', function (event) {
         var id = target.attr('data-bs-id');
         var modal = $(this)
         $.ajax({
-            url: '/students/data/' + id,
+            url: '/course/data/' + id,
             method: 'GET',
             success: function(response) {
                 $('#deleteId').val(response.id);
-                $('#Delete-Name').html(response.fullName);
+                $('#Delete-Name').html(response.name);
             }
         });
     });

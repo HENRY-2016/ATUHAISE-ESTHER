@@ -61,7 +61,9 @@
                     <th  class="text-center">Supervisor</th>
                     <th  class="text-center">Show</th>
                     <th  class="text-center">Modify</th>
+                    @if (Auth::User()->role == 'Admin')
                     <th  class="text-center">Delete</th>
+                    @endif
                 </tr>
             </thead>
 
@@ -87,11 +89,12 @@
                     <button type="button" class="btn btn-success" data-bs-created="{{$student -> created_at->toFormattedDateString()}}" data-bs-toggle="modal" data-bs-id="{{ $student->id }}" data-bs-target="#editModal"
                         >Comment</button>
                 </td>
+                @if (Auth::User()->role == 'Admin')
                 <td class="text-center">
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-id="{{ $student->id }}" data-bs-target="#deleteModal"
                     >Delete</button>
                 </td>
-        
+                @endif
 
             </tr>
             @endforeach

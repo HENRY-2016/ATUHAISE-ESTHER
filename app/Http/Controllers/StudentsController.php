@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GeneralHelper;
+use App\Models\CourseModel;
 use App\Models\StudentsModel;
 use App\Models\User;
 use Carbon\Carbon;
@@ -12,14 +14,28 @@ class StudentsController extends Controller
 
     public function index(Request $request)
     {
+        $user = GeneralHelper::getUserName();
+        $role = GeneralHelper::getUserRole();
+
+
+        $supervisors = User::where('role','Supervisor')->get(['id','name']);
+        $courses = CourseModel::get();
+
+        if($role == "Admin")
+        {
             $data = StudentsModel::latest()->get();
             $total = StudentsModel::count();
-            $supervisors = User::where('role','Supervisor')->get(['id','name']);
-
+        }
+        elseif($role == "Supervisor")
+        {
+            $data = StudentsModel::where("supervisor",$user)->get();
+            $total = StudentsModel::where("supervisor",$user)->count();
+        }
             // return $supervisors;
         return view('components/Students/Index',[
             'data'=>$data,'total'=>$total,
-            'supervisors'=>$supervisors
+            'supervisors'=>$supervisors,
+            'courses'=>$courses,
         ]);
     }
 
@@ -43,7 +59,7 @@ class StudentsController extends Controller
                 'fullName' => 'required',
                 'course' => 'required',
                 'regNum' => 'required',
-                'dob' => 'required',
+                'email' => 'required',
                 'supervisor' => 'required',
             ]);
 
@@ -52,7 +68,8 @@ class StudentsController extends Controller
                 'course'  => trim($request->course),
                 'regNum'  => trim($request->regNum),
                 'supervisor'  => trim($request->supervisor),
-                'dob'=>trim($request->dob),
+                'email'=>trim($request->email),
+                'dob'=>"",
 
             );
 
@@ -68,7 +85,6 @@ class StudentsController extends Controller
             return redirect()->route('students.index')->with('success', 'New Student Record Was Added In The System');
     }
 
-  
     public function show(string $id)
     {
         $landTitle = StudentsModel::findOrFail($id);
@@ -97,7 +113,7 @@ class StudentsController extends Controller
             'fullName' => 'required',
             'course' => 'required',
             'regNum' => 'required',
-            'dob' => 'required',
+            'email' => 'required',
             'supervisor' => 'required',
         ]);
 
@@ -106,7 +122,7 @@ class StudentsController extends Controller
             'course'  => trim($request->course),
             'regNum'  => trim($request->regNum),
             'supervisor'  => trim($request->supervisor),
-            'dob'=>trim($request->dob),
+            'email'=>trim($request->email),
 
         );
         StudentsModel::where('id',$rowId)->update($form_data);

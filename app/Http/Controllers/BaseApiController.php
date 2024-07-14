@@ -12,9 +12,9 @@ class BaseApiController extends Controller
     {
 
         $regNum = trim($request->regNum);
-        $dob = trim($request->dob);
+        $email = trim($request->email);
 
-        $data = StudentsModel::where('regNum',$regNum)->where('dob',$dob)->get(['id','fullName','dob','course','supervisor','regNum']);
+        $data = StudentsModel::where('regNum',$regNum)->where('email',$email)->get(['id','fullName','email','course','supervisor','regNum']);
         return $data;
 
     }
