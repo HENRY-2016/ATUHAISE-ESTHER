@@ -239,7 +239,7 @@ render() {
                                     {this.displayNestedData(item.notes)}
                                 <View style={{height:20}} ></View>
                                 <Text style={[styles.recordCardTitle,styles.successTexT,styles.primaryText]}>SUPERVISOR COMMENTS</Text>
-                                <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Name : {convertToCapitalLetters(item.supervisor)}</Text>
+                                <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Name :{"\n"} {convertToCapitalLetters(item.supervisor)}</Text>
                                     {this.displayCommentsData(item.comments)}
                                 <View style={{height:20}} ></View>
                             </View>

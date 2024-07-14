@@ -54,7 +54,7 @@ export default function App() {
 
 	const [showSplashScreen , setShowSplashScreen] = useState(true);
 	const [studentDob , setStudentDob] = useState('');
-	const [userRegNumber, setUserRegNumber] = useState('ss');
+	const [userRegNumber, setUserRegNumber] = useState('');
 	const [studentRegNum , setStudentRegNum] = useState('');
 
 	// setTimeout(()=>{ setShowSplashScreen(false)},4000);
@@ -88,7 +88,7 @@ export default function App() {
             const postRequest = await axios.post(APILogIn,
                 {
                     "regNum" :studentRegNum,
-                    "dob":studentDob,
+                    "email":studentDob,
                 }
             )
             
@@ -101,7 +101,7 @@ export default function App() {
             else
             {
                 let DBRegNum = jsonResults[0].regNum;
-                let DBDob  = jsonResults[0].dob;
+                let DBDob  = jsonResults[0].email;
                 if ((studentRegNum !== DBRegNum)&&(studentDob !== DBDob ))
                     {Alert.alert("Sorry ","\n\n Invalid Student Credentials \n\nReg Number\n Or\n DOD \n\nTry Again")}
 
@@ -109,7 +109,7 @@ export default function App() {
                 {
                     let userName= jsonResults[0].fullName;
                     let userCourse = jsonResults[0].course;
-                    let userDob = jsonResults[0].dob;
+                    let userDob = jsonResults[0].email;
                     let userRegNum = jsonResults[0].regNum;
                     let userSupervisor = jsonResults[0].supervisor;
 
@@ -155,7 +155,7 @@ return (
 						<View style={{height:20}} ></View>
 						<View>
 							<TextInput style={styles.inputs} value={studentRegNum} onChangeText={setUserRegNum}  placeholder="Registration Number ..."placeholderTextColor ={COLORS.secondaryColor}/>
-							<TextInput style={styles.inputs} onChangeText={setUserDob} placeholder="... YYYY-MM-DD ..."placeholderTextColor ={COLORS.secondaryColor} 
+							<TextInput style={styles.inputs} onChangeText={setUserDob} placeholder="... student Email ..."placeholderTextColor ={COLORS.secondaryColor} 
 							selectionColor={COLORS.primaryColor}/>
 						</View>
 						<View style={styles.bottomView}>

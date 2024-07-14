@@ -145,8 +145,10 @@ postUserData =  async () =>
         let course = this.state.UserCourse;
         let supervisor = this.state.UserSupervisor;
         
-        if (week.length == 0 || day.length == 0 || activitiesList.length == 1 || skillsList.length==1 || challengesList.length==1 || notesList.length ==1)
-        {Alert.alert("Massage","Week OR Day OR \n Activities OR Skills \n OR Challenges OR Notes \n Are Required")}
+        // if (week.length == 0 || day.length == 0 || activitiesList.length == 1 || skillsList.length==1 || challengesList.length==1 || notesList.length ==1)
+        if (week.length == 0 || day.length == 0)
+        // {Alert.alert("Massage","Week OR Day OR \n Activities OR Skills \n OR Challenges OR Notes \n Are Required")}
+        {Alert.alert("Massage","Week OR Day OR \n Activities OR Skills \n Are Required")}
         else
         {
             try

@@ -21,10 +21,11 @@
 
 ## GitHub Pushing
     git add .
-    git commit -m 'Initial Uploads'
+    git commit -m 'Updated TextInput Validation Length'
     git branch -M main
     git push -u -f origin main
 
 ## Create An App
   npx create-expo-app@latest --template blank 
 
+use email on login in 

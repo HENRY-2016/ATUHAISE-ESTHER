@@ -92,6 +92,7 @@ render() {
                         <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Course : {this.state.UserCourse}</Text>
                         <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Reg No : {this.state.UserRegNum}</Text>
                         <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Supervisor : {this.state.UserSupervisor}</Text>
+                        <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Email : {this.state.UserDob}</Text>
                     </View>
                     <View style={{height:10}} ></View>
                 </View>
