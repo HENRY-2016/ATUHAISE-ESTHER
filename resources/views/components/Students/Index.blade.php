@@ -24,9 +24,11 @@
             {{trans_choice('general.record',2)}}
             <span class="w3-badge w3-margin-left w3-red">{{$total}}</span>
         </button>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#createModal">
-            {{trans_choice('general.create',1)}}
-        </button>
+        @if (Auth::User()->role == 'Admin')
+            <button type="button" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#createModal">
+                {{trans_choice('general.create',1)}}
+            </button>
+        @endif
         <br>
 
         @if ($message = Session::get('success'))
