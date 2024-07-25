@@ -109,13 +109,14 @@ export default function App() {
                 {
                     let userName= jsonResults[0].fullName;
                     let userCourse = jsonResults[0].course;
+                    let userPlace = jsonResults[0].palace;
                     let userDob = jsonResults[0].email;
                     let userRegNum = jsonResults[0].regNum;
                     let userSupervisor = jsonResults[0].supervisor;
 
-
+					console.log("===="+userPlace)
                     try {
-                        let userAccount={UserName:userName,UserRegNum:userRegNum,UserDob:userDob,UserCourse:userCourse,UserSupervisor:userSupervisor}
+                        let userAccount={UserName:userName,UserRegNum:userRegNum,UserPalace:userPlace,UserDob:userDob,UserCourse:userCourse,UserSupervisor:userSupervisor}
                         const Details  = []
                         Details.push(userAccount)
                         await AsyncStorage.setItem('UserDetails',JSON.stringify(Details));

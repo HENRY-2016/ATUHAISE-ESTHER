@@ -19,6 +19,7 @@ constructor(props){
         UserName:'',
         UserRegNum:'',
         UserDob:'',
+        UserPlace:'',
         UserCourse:'',
         UserSupervisor:'',
 
@@ -45,12 +46,14 @@ initializeUserAccount = () =>
                 const jsonData = JSON.parse(Details)
                 let userName = jsonData[0].UserName;
                 let userRegNum = jsonData[0].UserRegNum;
+                let userPlace = jsonData[0].UserPalace;
                 let userDob= jsonData[0].UserDob;
                 let userCourse= jsonData[0].UserCourse;
                 let userSupervisor= jsonData[0].UserSupervisor;
     
-    
+                console.log(userPlace)
                 this.setState({UserName:userName});
+                this.setState({UserPlace:userPlace});
                 this.setState({UserRegNum:userRegNum});
                 this.setState({UserDob:userDob});
                 this.setState({UserCourse:userCourse});
@@ -91,6 +94,7 @@ render() {
                         <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Name : { convertToCapitalLetters(this.state.UserName)}</Text>
                         <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Course : {this.state.UserCourse}</Text>
                         <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Reg No : {this.state.UserRegNum}</Text>
+                        <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Place : {this.state.UserPlace}</Text>
                         <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Supervisor : {this.state.UserSupervisor}</Text>
                         <Text style={[styles.blackTexT,styles.primaryText,styles.boldTexT,styles.recordButtonsText]}>Email : {this.state.UserDob}</Text>
                     </View>

@@ -21,7 +21,7 @@
 
 ## GitHub Pushing
     git add .
-    git commit -m 'Updated TextInput Validation Length'
+    git commit -m 'Updated Internship Place'
     git branch -M main
     git push -u -f origin main
 
