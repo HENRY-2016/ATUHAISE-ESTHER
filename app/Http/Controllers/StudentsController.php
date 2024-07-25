@@ -60,12 +60,14 @@ class StudentsController extends Controller
                 'course' => 'required',
                 'regNum' => 'required',
                 'email' => 'required',
+                'palace' => 'required',
                 'supervisor' => 'required',
             ]);
 
             $form_data = array(
                 'fullName'  => trim($request->fullName),
                 'course'  => trim($request->course),
+                'palace'  => trim($request->palace),
                 'regNum'  => trim($request->regNum),
                 'supervisor'  => trim($request->supervisor),
                 'email'=>trim($request->email),
@@ -97,10 +99,14 @@ class StudentsController extends Controller
 
     public function edit(string $id)
     {
-        $landTitle = StudentsModel::findOrFail($id);
+        $student = StudentsModel::findOrFail($id);
+        $supervisors = User::where('role','Supervisor')->get(['id','name']);
+        $courses = CourseModel::get();
 
         return view('components/Students/Edit',[
-            'landTitle'=>$landTitle,
+            'student'=>$student,
+            'supervisors'=>$supervisors,
+            'courses'=>$courses,
         ]);
     }
 
@@ -113,6 +119,7 @@ class StudentsController extends Controller
             'fullName' => 'required',
             'course' => 'required',
             'regNum' => 'required',
+            'palace' => 'required',
             'email' => 'required',
             'supervisor' => 'required',
         ]);
@@ -120,12 +127,13 @@ class StudentsController extends Controller
         $form_data = array(
             'fullName'  => trim($request->fullName),
             'course'  => trim($request->course),
+            'palace'  => trim($request->palace),
             'regNum'  => trim($request->regNum),
             'supervisor'  => trim($request->supervisor),
             'email'=>trim($request->email),
 
         );
-        StudentsModel::where('id',$rowId)->update($form_data);
+        StudentsModel::where('id',$id)->update($form_data);
         return redirect()->route('students.index')->with('success', 'Student Record Was Updates Very Well');
     }
 

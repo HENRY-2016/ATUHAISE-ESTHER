@@ -14,9 +14,8 @@ class BaseApiController extends Controller
         $regNum = trim($request->regNum);
         $email = trim($request->email);
 
-        $data = StudentsModel::where('regNum',$regNum)->where('email',$email)->get(['id','fullName','email','course','supervisor','regNum']);
+        $data = StudentsModel::where('regNum',$regNum)->where('email',$email)->get(['id','fullName','palace','email','course','supervisor','regNum']);
         return $data;
-
     }
 
     function studentWeek1Logs (Request $request)

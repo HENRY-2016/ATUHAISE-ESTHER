@@ -62,6 +62,7 @@
                     <th  class="text-center">Reg Number</th>
                     <th  class="text-center">Email</th>
                     <th  class="text-center">Course</th>
+                    <th  class="text-center">Place</th>
                     <th  class="text-center">Supervisor</th>
                     {{-- <th  class="text-center">Show</th> --}}
                     
@@ -81,6 +82,7 @@
                 <td class="text-center">{{$student -> regNum}}</td>
                 <td class="text-center">{{$student -> email}}</td>
                 <td class="text-center">{{$student -> course}}</td>
+                <td class="text-center">{{$student -> palace}}</td>
                 <td class="text-center">{{$student -> supervisor}}</td>
                 {{-- <td class="text-center">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-id="{{ $student->id }}" data-bs-target="#showModal"
@@ -88,7 +90,7 @@
                 </td> --}}
                 @if (Auth::User()->role== 'Admin')
                 <td class="text-center">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-id="{{ $student->id }}" data-bs-target="#editModal"
+                    <a  class="btn btn-primary" href="{{route('students.edit',$student->id)}}"
                         >Edit</button>
                 </td>
                 
@@ -172,6 +174,10 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="my-grid-item">
+                        <label class="input-labels" >Place</label>
+                        <input type="text" name="palace" required class="form-control" placeholder="Interniship Place"   autocomplete="off">
+                    </div>
                 </div>
                 <br><br>
                 <center>
@@ -242,6 +248,10 @@
                                     <option   type="text" value="{{$supervisor->name}}" >{{$supervisor->name}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="my-grid-item">
+                            <label class="input-labels" >Place</label>
+                            <input type="text" name="palace" id="place" required class="form-control" placeholder="Interniship Place"   autocomplete="off">
                         </div>
                     </div>
                 <br><br>
@@ -315,6 +325,7 @@ $('#editModal').on('show.bs.modal', function (event) {
                 $('#course').val(response.course);
                 $('#regNum').val(response.regNum);
                 $('#supervisor').val(response.supervisor);
+                $('#place').val(response.palace);
                 $('#editId').val(response.id);
             }
         });
