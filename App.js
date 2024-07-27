@@ -14,6 +14,7 @@ import RecordScreen from "./src/components/Record";
 import HomeScreen from "./src/components/Home";
 import AccountScreen from "./src/components/Account";
 
+// This is how i upload my code on github 
 
 
 
@@ -22,6 +23,7 @@ const Tab = createMaterialTopTabNavigator();
 
 function MyTabs() {
 	const StudentRegNumber = 'DIT098';
+
 return (
 	
 	<Tab.Navigator

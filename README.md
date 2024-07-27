@@ -21,7 +21,7 @@
 
 ## GitHub Pushing
     git add .
-    git commit -m 'Updated Internship Place'
+    git commit -m 'Showing Esther How To Upload Code To Github'
     git branch -M main
     git push -u -f origin main
 
